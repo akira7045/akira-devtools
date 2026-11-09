@@ -12,6 +12,8 @@ suite. No third-party packages required — just Python 3.8+.
 | `envcheck`  | Lint a `.env` against a template/schema (never prints secrets) | 30/30 |
 | `logsum`    | Summarize access/syslog/JSONL logs into counts (read-only) | 13/13 |
 
+Read the write-up: **[Catching API contract drift in CI](docs/catching-api-contract-drift-in-ci.md)** — a worked example using `apidiff`, with real command output.
+
 Try everything in one command, zero setup: `bash demo.sh`
 (creates a throwaway temp dir, feeds each tool sample input, cleans up after itself).
 
