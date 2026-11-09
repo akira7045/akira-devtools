@@ -56,6 +56,14 @@ reply there; no email signup or external account needed.
 See [SALES.md](SALES.md) for the current option list and indicative pricing.
 
 ## Quick start
+
+Download the latest release (single tarball, MIT):
+```bash
+curl -L -O https://github.com/akira7045/akira-devtools/releases/latest/download/akira-devtools-1.0.0.tar.gz
+tar xzf akira-devtools-1.0.0.tar.gz && cd akira-devtools-1.0.0
+```
+
+Or clone and run each tool directly — no install step required:
 ```bash
 python3 apidiff/apidiff.py --help
 python3 secretscan/secretscan.py --help
