@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Self-contained tests for envcheck. Run: python3 test_envcheck.py"""
+import atexit
 import os
+import shutil
 import tempfile
 
 import envcheck as e
 
 _fail = 0
 _pass = 0
+_created = []
 
 
 def check(name, cond):
@@ -21,10 +24,17 @@ def check(name, cond):
 def make(files):
     """files: dict filename -> content. Returns temp dir."""
     d = tempfile.mkdtemp(prefix="envcheck_")
+    _created.append(d)
     for name, content in files.items():
         with open(os.path.join(d, name), "w", encoding="utf-8") as f:
             f.write(content)
     return d
+
+
+@atexit.register
+def _cleanup():
+    for d in _created:
+        shutil.rmtree(d, ignore_errors=True)
 
 
 def run(d, *args):
