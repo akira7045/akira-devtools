@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AKIRA Dev Tools — single-file, dependency-free Python CLIs</title>
+<meta name="description" content="Five small, tested, dependency-free Python 3 CLI tools: apidiff, secretscan, jsonl2csv, dupfind, envcheck.">
+<style>
+  :root { --fg:#1b1f24; --muted:#57606a; --bg:#ffffff; --card:#f6f8fa; --line:#d0d7de; --accent:#0969da; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--fg); background:var(--bg); }
+  .wrap { max-width:860px; margin:0 auto; padding:48px 20px 80px; }
+  h1 { font-size:2rem; margin:0 0 8px; }
+  .lead { color:var(--muted); font-size:1.1rem; margin:0 0 32px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .card h2 { font-size:1.05rem; margin:0 0 6px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .card p { margin:0 0 10px; color:var(--muted); font-size:.95rem; }
+  .tag { display:inline-block; font-size:.75rem; background:#ddf4ff; color:var(--accent); border-radius:20px; padding:2px 10px; }
+  pre { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; overflow:auto; font-size:.9rem; }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .note { font-size:.9rem; color:var(--muted); border-left:3px solid var(--line); padding-left:14px; margin:28px 0; }
+  a { color:var(--accent); }
+  footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>AKIRA Dev Tools</h1>
+  <p class="lead">Five single-file, dependency-free Python&nbsp;3 CLI tools. Stdlib only. Tested. No pip, no supply chain.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>apidiff</h2>
+      <p>Capture a baseline from any HTTP endpoint, then diff the live response to catch breaking changes. Auth &amp; POST supported.</p>
+      <span class="tag">48 tests</span>
+    </div>
+    <div class="card">
+      <h2>secretscan</h2>
+      <p>Scan a repo for hardcoded secrets before you commit. Read-only, never modifies files.</p>
+      <span class="tag">13 tests</span>
+    </div>
+    <div class="card">
+      <h2>jsonl2csv</h2>
+      <p>Convert JSON / JSONL to CSV with explicit field control. Handles ragged records.</p>
+      <span class="tag">13 tests</span>
+    </div>
+    <div class="card">
+      <h2>dupfind</h2>
+      <p>Find duplicate files by content hash. Read-only by design &mdash; it never deletes anything.</p>
+      <span class="tag">18 tests</span>
+    </div>
+    <div class="card">
+      <h2>envcheck</h2>
+      <p>Lint a .env file against a template or schema. Reports missing/extra keys without ever printing secret values.</p>
+      <span class="tag">30 tests</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Honest positioning.</strong> These are intentionally small. They are not meant to replace mature projects
+    (gitleaks, trufflehog, jq, fdupes, rdfind). Their niche: one file you can read in a minute, drop in, and trust &mdash;
+    for air-gapped, locked-down CI, or throwaway scripts where installing packages is a burden.
+    If you need deep rule sets or high volume, use the established tools.
+  </div>
+
+  <h2 style="font-size:1.2rem;">Quick start</h2>
+<pre><code># each tool is a single .py file — copy it and go
+python3 apidiff.py    --help
+python3 secretscan.py --help
+python3 jsonl2csv.py  --help
+python3 dupfind.py    --help
+python3 envcheck.py   --help</code></pre>
+
+  <h2 style="font-size:1.2rem;">Run the tests</h2>
+<pre><code>python3 test_apidiff.py     # 48 passed
+python3 test_secretscan.py  # 13 passed
+python3 test_jsonl2csv.py   # 13 passed
+python3 test_dupfind.py    # 18 passed
+python3 test_envcheck.py   # 30 passed</code></pre>
+
+  <footer>
+    Python 3.8+ &middot; MIT-licensed &middot; 122 tests total.
+  </footer>
+</div>
+</body>
+</html>
