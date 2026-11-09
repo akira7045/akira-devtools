@@ -138,5 +138,6 @@ five other single-file tools: `secretscan`, `jsonl2csv`, `dupfind`, `envcheck`,
 - **Paid (for teams that need it)**: a commercial license with a 30-day
   bug-fix window and a named support contact — the things a company's
   procurement actually asks for that MIT doesn't provide.
+  Buy at a fixed price: https://15roh.gumroad.com/l/apidiff-commercial
 
 Repo: https://github.com/akira7045/akira-devtools

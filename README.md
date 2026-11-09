@@ -53,6 +53,15 @@ Pricing and scope are agreed per request. To start, **open a GitHub issue titled
 `inquiry: <tool or bundle>`** on this repository and describe your use case. I
 reply there; no email signup or external account needed.
 
+Fixed-price options for commercial license + 30-day support are also available
+to buy directly:
+
+- [apidiff — commercial license + support](https://15roh.gumroad.com/l/apidiff-commercial)
+- [secretscan — commercial license + support](https://15roh.gumroad.com/l/secretscan-commercial)
+- [dupfind — commercial license + support](https://15roh.gumroad.com/l/dupfind-commercial)
+- [jsonl2csv — commercial license + support](https://15roh.gumroad.com/l/jsonl2csv-commercial)
+- [Bundle — all tools + setup + 30-day support](https://15roh.gumroad.com/l/akira-devtools-bundle)
+
 See [SALES.md](SALES.md) for the current option list and indicative pricing.
 
 ## Quick start

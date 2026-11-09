@@ -135,5 +135,6 @@ python3 apidiff.py check "$API_URL" contract.json --json
 - **無料**: コードは GitHub 上で MIT ライセンス。使う、フォークする、出荷する、自由に。
 - **有料（チーム向け）**: 30 日間のバグ修正窓口と名前の出たサポート窓口付きの
   商用ライセンス——企業の調達が MIT では得られないと求めるもの。
+  固定価格で購入: https://15roh.gumroad.com/l/apidiff-commercial
 
 リポジトリ: https://github.com/akira7045/akira-devtools
