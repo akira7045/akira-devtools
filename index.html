@@ -33,31 +33,67 @@
     <div class="card">
       <h2>apidiff</h2>
       <p>Capture a baseline from any HTTP endpoint, then diff the live response to catch breaking changes. Auth &amp; POST supported.</p>
+      <pre><code>$ apidiff.py diff v1.json v2.json
+[changed] version
+    - "1.2.3"
+    + "2.0.0"</code></pre>
       <span class="tag">48 tests</span>
     </div>
     <div class="card">
       <h2>secretscan</h2>
       <p>Scan a repo for hardcoded secrets before you commit. Read-only, never modifies files.</p>
+      <pre><code>$ secretscan.py code.py
+Found 2 potential secret(s):
+
+  [generic_password] code.py:1  (entropy=4.61)
+      API_KEY = "sk_live_ABC1234567890abcdef"
+  [generic_assignment] code.py:1  (entropy=4.61)
+      API_KEY = "sk_live_ABC1234567890abcdef"</code></pre>
       <span class="tag">13 tests</span>
     </div>
     <div class="card">
       <h2>jsonl2csv</h2>
       <p>Convert JSON / JSONL to CSV with explicit field control. Handles ragged records.</p>
+      <pre><code>$ jsonl2csv.py d.jsonl
+warning: 1/2 rows missing one or more columns
+wrote 2 rows x 3 columns
+a,b,c
+1,2,
+3,4,5</code></pre>
       <span class="tag">13 tests</span>
     </div>
     <div class="card">
       <h2>dupfind</h2>
       <p>Find duplicate files by content hash. Read-only by design &mdash; it never deletes anything.</p>
+      <pre><code>$ dupfind.py ./photos
+5891b5b522d5df08         6B  x2
+    ./photos/a.txt
+    ./photos/sub/b.txt
+
+1 duplicate group(s), 6B reclaimable.</code></pre>
       <span class="tag">18 tests</span>
     </div>
     <div class="card">
       <h2>envcheck</h2>
       <p>Lint a .env file against a template or schema. Reports missing/extra keys without ever printing secret values.</p>
+      <pre><code>$ envcheck.py .env --example .env.example
+WARN   missing key 'SECRET' (present in .env.example)
+
+2 keys, 0 error(s), 1 warning(s)</code></pre>
       <span class="tag">30 tests</span>
     </div>
     <div class="card">
       <h2>logsum</h2>
       <p>Summarize access / syslog / JSONL logs into counts by status, level, app, or any field. Read-only.</p>
+      <pre><code>$ logsum.py access.log --format access --by status
+total lines : 10
+matched     : 10
+grouped by  : status
+  200  5
+  500  2
+  201  1
+  401  1
+  404  1</code></pre>
       <span class="tag">13 tests</span>
     </div>
   </div>
