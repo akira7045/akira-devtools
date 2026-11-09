@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "akira-devtools"
+version = "1.0.0"
+description = "Zero-dependency developer tools: secretscan, apidiff, jsonl2csv, dupfind, envcheck, logsum"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Araki Akira" }]
+keywords = ["cli", "developer-tools", "secretscan", "jsonl", "diff", "log"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/akira7045/akira-devtools"
+
+[project.scripts]
+akira-devtools = "akira_devtools:main"
+secretscan = "akira_devtools.cli:secretscan_main"
+apidiff = "akira_devtools.cli:apidiff_main"
+jsonl2csv = "akira_devtools.cli:jsonl2csv_main"
+dupfind = "akira_devtools.cli:dupfind_main"
+envcheck = "akira_devtools.cli:envcheck_main"
+logsum = "akira_devtools.cli:logsum_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

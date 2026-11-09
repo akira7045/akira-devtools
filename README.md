@@ -52,6 +52,14 @@ Symlink all six onto your PATH — no pip, no copying into site-packages:
 ```
 Then just run `apidiff --help`, `secretscan .`, etc.
 
+### Install via pip (optional)
+A packaged build lives in `python/`. It exposes each tool as a command plus a
+unified `akira-devtools <tool>` dispatcher:
+```bash
+pip install ./python
+akira-devtools --help
+```
+
 ## Run the tests
 ```bash
 python3 apidiff/test_apidiff.py
@@ -74,6 +82,7 @@ products/
   dupfind/     dupfind.py, test_dupfind.py, README.md, LICENSE
   envcheck/    envcheck.py, test_envcheck.py, README.md, LICENSE
   logsum/      logsum.py, test_logsum.py, README.md, LICENSE
+  python/      pip-installable packaging (pyproject.toml, console scripts)
 ```
 
 Each tool is licensed under the terms in its own `LICENSE` file.
