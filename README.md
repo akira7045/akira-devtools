@@ -1,6 +1,6 @@
 # AKIRA Dev Tools Bundle
 
-Five single-file, dependency-free Python 3 CLI tools. Each ships with a test
+Six single-file, dependency-free Python 3 CLI tools. Each ships with a test
 suite. No third-party packages required — just Python 3.8+.
 
 | Tool | Purpose | Tests |
@@ -10,6 +10,7 @@ suite. No third-party packages required — just Python 3.8+.
 | `jsonl2csv` | Convert JSON / JSONL to CSV with field control         | 13/13 |
 | `dupfind`   | Find duplicate files by hash (read-only, never deletes)| 18/18 |
 | `envcheck`  | Lint a `.env` against a template/schema (never prints secrets) | 30/30 |
+| `logsum`    | Summarize access/syslog/JSONL logs into counts (read-only) | 13/13 |
 
 Try everything in one command, zero setup: `bash demo.sh`
 (creates a throwaway temp dir, feeds each tool sample input, cleans up after itself).
@@ -17,7 +18,7 @@ Try everything in one command, zero setup: `bash demo.sh`
 ## Why these
 - **Single file** — copy one `.py` into your project, done.
 - **Stdlib only** — no pip, no virtualenv, no supply-chain risk.
-- **Tested** — 122 tests across the five tools, all passing.
+- **Tested** — 135 tests across the six tools, all passing.
 - **Safe** — `dupfind` and `secretscan` never modify or delete your files.
 
 ## Honest positioning
@@ -40,10 +41,11 @@ python3 secretscan/secretscan.py --help
 python3 jsonl2csv/jsonl2csv.py --help
 python3 dupfind/dupfind.py --help
 python3 envcheck/envcheck.py --help
+python3 logsum/logsum.py --help
 ```
 
 ### Install as commands (optional)
-Symlink all five onto your PATH — no pip, no copying into site-packages:
+Symlink all six onto your PATH — no pip, no copying into site-packages:
 ```bash
 ./install.sh                 # -> ~/.local/bin
 # or:  PREFIX=/usr/local ./install.sh
@@ -57,12 +59,13 @@ python3 secretscan/test_secretscan.py
 python3 jsonl2csv/test_jsonl2csv.py
 python3 dupfind/test_dupfind.py
 python3 envcheck/test_envcheck.py
+python3 logsum/test_logsum.py
 ```
 
 ## Layout
 ```
 products/
-  install.sh       symlink the four tools onto your PATH
+  install.sh       symlink the tools onto your PATH
   README.md
   LICENSE
   apidiff/     apidiff.py, test_apidiff.py, README.md, LICENSE
@@ -70,6 +73,7 @@ products/
   jsonl2csv/   jsonl2csv.py, test_jsonl2csv.py, README.md, LICENSE
   dupfind/     dupfind.py, test_dupfind.py, README.md, LICENSE
   envcheck/    envcheck.py, test_envcheck.py, README.md, LICENSE
+  logsum/      logsum.py, test_logsum.py, README.md, LICENSE
 ```
 
 Each tool is licensed under the terms in its own `LICENSE` file.

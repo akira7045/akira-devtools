@@ -11,7 +11,7 @@ BIN="$PREFIX/bin"
 
 mkdir -p "$BIN"
 
-for tool in apidiff secretscan jsonl2csv dupfind envcheck; do
+for tool in apidiff secretscan jsonl2csv dupfind envcheck logsum; do
   target="$SRC_DIR/$tool/$tool.py"
   if [ ! -f "$target" ]; then
     echo "missing: $target" >&2

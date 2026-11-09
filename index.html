@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AKIRA Dev Tools — single-file, dependency-free Python CLIs</title>
-<meta name="description" content="Five small, tested, dependency-free Python 3 CLI tools: apidiff, secretscan, jsonl2csv, dupfind, envcheck.">
+<meta name="description" content="Six small, tested, dependency-free Python 3 CLI tools: apidiff, secretscan, jsonl2csv, dupfind, envcheck, logsum.">
 <style>
   :root { --fg:#1b1f24; --muted:#57606a; --bg:#ffffff; --card:#f6f8fa; --line:#d0d7de; --accent:#0969da; }
   * { box-sizing:border-box; }
@@ -27,7 +27,7 @@
 <body>
 <div class="wrap">
   <h1>AKIRA Dev Tools</h1>
-  <p class="lead">Five single-file, dependency-free Python&nbsp;3 CLI tools. Stdlib only. Tested. No pip, no supply chain.</p>
+  <p class="lead">Six single-file, dependency-free Python&nbsp;3 CLI tools. Stdlib only. Tested. No pip, no supply chain.</p>
 
   <div class="grid">
     <div class="card">
@@ -55,6 +55,11 @@
       <p>Lint a .env file against a template or schema. Reports missing/extra keys without ever printing secret values.</p>
       <span class="tag">30 tests</span>
     </div>
+    <div class="card">
+      <h2>logsum</h2>
+      <p>Summarize access / syslog / JSONL logs into counts by status, level, app, or any field. Read-only.</p>
+      <span class="tag">13 tests</span>
+    </div>
   </div>
 
   <div class="note">
@@ -70,17 +75,19 @@ python3 apidiff.py    --help
 python3 secretscan.py --help
 python3 jsonl2csv.py  --help
 python3 dupfind.py    --help
-python3 envcheck.py   --help</code></pre>
+python3 envcheck.py   --help
+python3 logsum.py     --help</code></pre>
 
   <h2 style="font-size:1.2rem;">Run the tests</h2>
 <pre><code>python3 test_apidiff.py     # 48 passed
 python3 test_secretscan.py  # 13 passed
 python3 test_jsonl2csv.py   # 13 passed
 python3 test_dupfind.py    # 18 passed
-python3 test_envcheck.py   # 30 passed</code></pre>
+python3 test_envcheck.py   # 30 passed
+python3 test_logsum.py     # 13 passed</code></pre>
 
   <footer>
-    Python 3.8+ &middot; MIT-licensed &middot; 122 tests total.
+    Python 3.8+ &middot; MIT-licensed &middot; 135 tests total.
   </footer>
 </div>
 </body>
