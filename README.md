@@ -36,6 +36,25 @@ JSON transforms, fdupes/rdfind for duplicate detection). Their niche is:
 If you need deep rule sets or high-volume performance, use the established
 tools. If you need "grab one file and go", these are for you.
 
+## Commercial use & support
+
+The code is MIT — free for you to use, modify, and ship, including commercially,
+under the MIT terms. No license purchase is required.
+
+If you want more than the MIT grant covers, these are available on request:
+
+- **Commercial support** — a named contact and a 30-day bug-fix window for a
+  specific tool or the bundle, instead of "read the source yourself".
+- **Setup / CI integration** — I wire a tool into your pipeline and verify it
+  against your data.
+- **Custom change** — a focused feature or behavior change to one of these tools.
+
+Pricing and scope are agreed per request. To start, **open a GitHub issue titled
+`inquiry: <tool or bundle>`** on this repository and describe your use case. I
+reply there; no email signup or external account needed.
+
+See [SALES.md](SALES.md) for the current option list and indicative pricing.
+
 ## Quick start
 ```bash
 python3 apidiff/apidiff.py --help
