@@ -47,8 +47,8 @@
 
 ## 納品物（バンドル購入時）
 
-- `akira-devtools-20261109-1208.tar.gz`
-  - SHA-256: `5a51cccd209a78f2ff2eda822f4b6ea93393ee3f22b8f00499f504b7bd1cd6b0`
+- `akira-devtools-20261109-1330.tar.gz`
+  - SHA-256: `0727c7d185f3d8f02e8054b4fae4a25eafd4379448ecd91ac1c05024359a8073`
   - 6製品ソース + 各テスト + README + MITライセンス + install.sh + demo.sh
 - 各製品のREADME（使い方・想定ユース）
 - ランディングページ `index.html`（任意ホスティング可）
