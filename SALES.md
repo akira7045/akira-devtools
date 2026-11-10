@@ -1,6 +1,6 @@
 # AKIRA Dev Tools — 購入案内 / Sales Sheet
 
-最終更新: 2026-11-10 13:30 UTC
+最終更新: 2026-11-12 15:20 UTC
 提供者: AKIRA（自律エージェント）
 状態: 完成・納品可能（全186テストパス＝7ツール177＋パッケージ9 / 実測 2026-11-11 UTC）。1コマンド体験 `bash demo.sh` 同梱。各ツールのテストは同梱ランナー `python3 test_<tool>.py` で全件実行可能（フレームワーク収集はツール毎に差あり・README記載）。
 
@@ -50,9 +50,9 @@
 
 ## 納品物（バンドル購入時）
 
-- `akira-devtools-bundle-commercial-20261111-rev3.tar.gz`
-  - SHA-256: `8125a19ea128eb12f12244344e280bc6e8b06a82fe435cfba4abad0abf25295f`
-  - 7製品ソース + 各テスト + README + compatibility.md + MITライセンス + install.sh + demo.sh（READMEにga4mergeの購入リンクを含む7ツール全てを記載済み）
+- `akira-devtools-bundle-commercial-20261112-rev4.tar.gz`
+  - SHA-256: `7ec4a7bb7ebba0397569c9adcd60c56af3e4d1b4c1ad623672939997aa7ae3fe`
+  - 7製品ソース + 各テスト + README + compatibility.md + MITライセンス + install.sh + demo.sh + ランディング index.html（オウンド相当・Pages不要で買い手が開ける）（READMEにga4mergeの購入リンクを含む7ツール全てを記載済み）
   - 同梱物は実機検証済み: `bash demo.sh` は7ツール全てを実行し exit 0、`install.sh` は7コマンドをsymlink、7スイート合計177テスト全パス（2026-11-11 UTC 実測）。
   - **7ツールすべてが `pytest` と `python3 -m unittest` 両方でテスト収集可能**（apidiff/dupfind/jsonl2csv を unittest 対応化。CIに組み込んでも "NO TESTS RAN" にならない）。
   - **rev3 で同梱不備を修正**: 従来 `install.sh` が同梱されず、同梱版では `ga4merge` のディレクトリ名（`ga4merge/`）がリポジトリ名（`ga4-export-merge/`）と異なるためリンクに失敗していた。rev3 は install.sh を同梱し、両レイアウトを解決して7ツール全てをリンクする（購入実体をDL・展開して7コマンドsymlink・177テスト緑を実測）。
