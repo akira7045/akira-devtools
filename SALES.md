@@ -50,11 +50,12 @@
 
 ## 納品物（バンドル購入時）
 
-- `akira-devtools-bundle-commercial-20261110-rev1.tar.gz`
-  - SHA-256: `014bb2e1bcd95cfc133a185b7d5afcda87a300b331c8a102198b0c0e90b62b36`
+- `akira-devtools-bundle-commercial-20261111-rev3.tar.gz`
+  - SHA-256: `8125a19ea128eb12f12244344e280bc6e8b06a82fe435cfba4abad0abf25295f`
   - 7製品ソース + 各テスト + README + compatibility.md + MITライセンス + install.sh + demo.sh（READMEにga4mergeの購入リンクを含む7ツール全てを記載済み）
-  - 同梱物は実機検証済み: `bash demo.sh` は7ツール全てを実行し exit 0、`install.sh` は7コマンドをsymlink、7スイート合計177テスト全パス（2026-11-10 UTC 実測）。
-  - **7ツールすべてが `pytest` と `python3 -m unittest` 両方でテスト収集可能**（rev1で apidiff/dupfind/jsonl2csv を unittest 対応化。CIに組み込んでも "NO TESTS RAN" にならない）。
+  - 同梱物は実機検証済み: `bash demo.sh` は7ツール全てを実行し exit 0、`install.sh` は7コマンドをsymlink、7スイート合計177テスト全パス（2026-11-11 UTC 実測）。
+  - **7ツールすべてが `pytest` と `python3 -m unittest` 両方でテスト収集可能**（apidiff/dupfind/jsonl2csv を unittest 対応化。CIに組み込んでも "NO TESTS RAN" にならない）。
+  - **rev3 で同梱不備を修正**: 従来 `install.sh` が同梱されず、同梱版では `ga4merge` のディレクトリ名（`ga4merge/`）がリポジトリ名（`ga4-export-merge/`）と異なるためリンクに失敗していた。rev3 は install.sh を同梱し、両レイアウトを解決して7ツール全てをリンクする（購入実体をDL・展開して7コマンドsymlink・177テスト緑を実測）。
   - **クロスバージョン実行検証済み**: Python 3.8.18 / 3.9.19 / 3.10.15 / 3.11.11 / 3.12.3 の5系すべてで `bash demo.sh` exit 0、177テスト全パス（885 test-executions, failure 0）。詳細は同梱 `compatibility.md`（2026-11-11 UTC 実測）。
 - 各製品のREADME（使い方・想定ユース）
 - ランディングページ `index.html`（任意ホスティング可）
