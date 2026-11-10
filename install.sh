@@ -11,8 +11,10 @@ BIN="$PREFIX/bin"
 
 mkdir -p "$BIN"
 
-for tool in apidiff secretscan jsonl2csv dupfind envcheck logsum; do
-  target="$SRC_DIR/$tool/$tool.py"
+for pair in apidiff:apidiff secretscan:secretscan jsonl2csv:jsonl2csv dupfind:dupfind envcheck:envcheck logsum:logsum ga4merge:ga4-export-merge; do
+  tool=${pair%%:*}
+  dir=${pair#*:}
+  target="$SRC_DIR/$dir/$tool.py"
   if [ ! -f "$target" ]; then
     echo "missing: $target" >&2
     exit 1

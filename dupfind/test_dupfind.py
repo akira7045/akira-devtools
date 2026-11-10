@@ -74,7 +74,11 @@ def test_min_size():
         make(d, "big1", b"X" * 100)
         make(d, "big2", b"X" * 100)
         r = run(["--min-size", "10", d])
-        check("minsize_excludes_small", "s1" not in r.stdout)
+        # s1/s2 live in the temp root; their full path legitimately contains
+        # the randomized dir name, so match the basename, not a path substring.
+        listed = {os.path.basename(l.strip())
+                  for l in r.stdout.splitlines() if l.strip().startswith("/")}
+        check("minsize_excludes_small", "s1" not in listed)
         check("minsize_keeps_big", "big1" in r.stdout)
 
 

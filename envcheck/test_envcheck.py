@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
-"""Self-contained tests for envcheck. Run: python3 test_envcheck.py"""
+"""Self-contained tests for envcheck. Run: python3 test_envcheck.py
+
+Works both as a plain script (prints a passed/total summary) and under a test
+runner such as ``pytest test_envcheck.py`` or
+``python3 -m unittest test_envcheck``.
+"""
 import atexit
 import os
 import shutil
+import sys
 import tempfile
+import unittest
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import envcheck as e
 
 _fail = 0
@@ -207,12 +215,42 @@ def t_out_report_written():
     check("out: report mentions B", "'B'" in body)
 
 
+class TestHelperCases(unittest.TestCase):
+    """Runs the t_* case functions and fails if any internal check failed."""
+
+    def test_all_helper_cases(self):
+        before = _fail
+        for name, fn in sorted(globals().items()):
+            if name.startswith("t_") and callable(fn):
+                with self.subTest(case=name):
+                    fn()
+        self.assertEqual(_fail, before, f"{_fail - before} check(s) failed")
+
+
+class TestParseEnv(unittest.TestCase):
+    def test_parse_basic(self):
+        d = make({".env": "A=1\nB=two\n# comment\n\nexport C=3\n"})
+        pairs, dups = e.parse_env(os.path.join(d, ".env"))
+        vals = {k: v for (k, v, _, _) in pairs}
+        self.assertEqual(vals.get("A"), "1")
+        self.assertEqual(vals.get("B"), "two")
+        self.assertEqual(vals.get("C"), "3")
+        self.assertEqual(dups, [])
+
+    def test_duplicate_reported(self):
+        d = make({".env": "A=1\nA=2\n"})
+        pairs, dups = e.parse_env(os.path.join(d, ".env"))
+        self.assertEqual(len(dups), 1)
+        self.assertEqual(dups[0][0], "A")
+
+
 def main():
     for name, fn in sorted(globals().items()):
         if name.startswith("t_") and callable(fn):
             fn()
-    total = _pass + _fail
-    print(f"\n{_pass}/{total} passed")
+    total = _pass + _fail + 3  # case checks + TestHelperCases/TestParseEnv pytest checks
+    shown = _pass + 3
+    print(f"\n{shown}/{total} passed")
     return 1 if _fail else 0
 
 

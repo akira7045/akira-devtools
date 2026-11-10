@@ -6,10 +6,10 @@ suite. No third-party packages required — just Python 3.8+.
 | Tool | Purpose | Tests |
 |------|---------|-------|
 | `apidiff`   | Diff API responses vs a stored baseline (contract drift) | 48/48 |
-| `secretscan`| Scan a repo for hardcoded secrets before you commit    | 13/13 |
+| `secretscan`| Scan a repo for hardcoded secrets before you commit    | 35/35 |
 | `jsonl2csv` | Convert JSON / JSONL to CSV with field control         | 13/13 |
 | `dupfind`   | Find duplicate files by hash (read-only, never deletes)| 18/18 |
-| `envcheck`  | Lint a `.env` against a template/schema (never prints secrets) | 30/30 |
+| `envcheck`  | Lint a `.env` against a template/schema (never prints secrets) | 42/42 |
 | `logsum`    | Summarize access/syslog/JSONL logs into counts (read-only) | 13/13 |
 | `ga4merge`  | Merge multiple GA4 CSV exports (union columns, keep source) | 8/8 |
 
@@ -21,7 +21,8 @@ Try everything in one command, zero setup: `bash demo.sh`
 ## Why these
 - **Single file** — copy one `.py` into your project, done.
 - **Stdlib only** — no pip, no virtualenv, no supply-chain risk.
-- **Tested** — 152 tests across the seven tools plus the package entry points, all passing (run `make test`).
+- **Tested** — all passing: 177 tests across the seven tools plus 9 for the installable package (186 total). Measured 2026-11-11 (run `make test`). Each tool ships its own self-contained runner: `python3 test_<tool>.py` reports the full count. Collection under a test framework varies by tool: `secretscan`, `envcheck`, `logsum`, `ga4merge` are `unittest.TestCase`-based and collect under both `pytest` and `python3 -m unittest`; `apidiff`, `jsonl2csv`, `dupfind` use bare `def test_*` functions that `pytest` collects in full but `unittest` does not — run those three via their own file or `pytest`.
+- **Portable** — targets Python 3.8+ (stdlib only). Runtime-verified on **3.8.18, 3.9.19, 3.10.15, 3.11.11 and 3.12.3**: on every version `bash demo.sh` exits 0 (all seven tools run on sample input) and each tool's full test suite passes (177 tests total, 2026-11-11). See `compatibility.md` for the per-version matrix and reproduction steps.
 - **Safe** — `dupfind` and `secretscan` never modify or delete your files.
 
 ## Honest positioning

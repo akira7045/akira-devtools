@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AKIRA Dev Tools — single-file, dependency-free Python CLIs</title>
-<meta name="description" content="Six small, tested, dependency-free Python 3 CLI tools: apidiff, secretscan, jsonl2csv, dupfind, envcheck, logsum.">
+<meta name="description" content="Seven small, tested, dependency-free Python 3 CLI tools: apidiff, secretscan, jsonl2csv, dupfind, envcheck, logsum, ga4merge.">
 <style>
   :root { --fg:#1b1f24; --muted:#57606a; --bg:#ffffff; --card:#f6f8fa; --line:#d0d7de; --accent:#0969da; }
   * { box-sizing:border-box; }
@@ -27,7 +27,7 @@
 <body>
 <div class="wrap">
   <h1>AKIRA Dev Tools</h1>
-  <p class="lead">Six single-file, dependency-free Python&nbsp;3 CLI tools. Stdlib only. Tested. No pip, no supply chain.</p>
+  <p class="lead">Seven single-file, dependency-free Python&nbsp;3 CLI tools. Stdlib only. Tested. No pip, no supply chain.</p>
 
   <div class="grid">
     <div class="card">
@@ -49,7 +49,7 @@ Found 2 potential secret(s):
       API_KEY = "sk_live_ABC1234567890abcdef"
   [generic_assignment] code.py:1  (entropy=4.61)
       API_KEY = "sk_live_ABC1234567890abcdef"</code></pre>
-      <span class="tag">13 tests</span>
+      <span class="tag">35 tests</span>
     </div>
     <div class="card">
       <h2>jsonl2csv</h2>
@@ -80,7 +80,7 @@ a,b,c
 WARN   missing key 'SECRET' (present in .env.example)
 
 2 keys, 0 error(s), 1 warning(s)</code></pre>
-      <span class="tag">30 tests</span>
+      <span class="tag">42 tests</span>
     </div>
     <div class="card">
       <h2>logsum</h2>
@@ -95,6 +95,17 @@ grouped by  : status
   401  1
   404  1</code></pre>
       <span class="tag">13 tests</span>
+    </div>
+    <div class="card">
+      <h2>ga4merge</h2>
+      <p>Merge multiple GA4 CSV exports into one clean table. Unions columns, adds a source column, skips the export preamble.</p>
+      <pre><code>$ ga4merge.py a.csv b.csv -o merged.csv
+ga4merge: merged 4 rows from 2 files -> merged.csv
+
+source_file,Date,Sessions,Active users,Conversions
+a.csv,2026-11-01,120,80,
+b.csv,2026-11-01,,80,9</code></pre>
+      <span class="tag">8 tests</span>
     </div>
   </div>
 
@@ -112,7 +123,8 @@ python3 secretscan.py --help
 python3 jsonl2csv.py  --help
 python3 dupfind.py    --help
 python3 envcheck.py   --help
-python3 logsum.py     --help</code></pre>
+python3 logsum.py     --help
+python3 ga4merge.py   --help</code></pre>
 
   <div class="note">
     <strong>Worked example.</strong> Read
@@ -122,14 +134,15 @@ python3 logsum.py     --help</code></pre>
 
   <h2 style="font-size:1.2rem;">Run the tests</h2>
 <pre><code>python3 test_apidiff.py     # 48 passed
-python3 test_secretscan.py  # 13 passed
+python3 test_secretscan.py  # 35 passed
 python3 test_jsonl2csv.py   # 13 passed
 python3 test_dupfind.py    # 18 passed
-python3 test_envcheck.py   # 30 passed
-python3 test_logsum.py     # 13 passed</code></pre>
+python3 test_envcheck.py   # 42 passed
+python3 test_logsum.py     # 13 passed
+python3 test_ga4merge.py    # 8 passed</code></pre>
 
   <footer>
-    Python 3.8+ &middot; MIT-licensed &middot; 135 tests total.
+    Python 3.8+ &middot; MIT-licensed &middot; 177 tests total.
   </footer>
 </div>
 </body>

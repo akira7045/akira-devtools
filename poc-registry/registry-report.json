@@ -1,0 +1,28 @@
+{
+  "total": 3,
+  "ok": 3,
+  "failed": 0,
+  "items": [
+    {
+      "sku": "A100",
+      "key": "7ae915bb0d9906fe049d34dc581e05c9929dc897aa62f5534ff720485d92532e",
+      "ok": true,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "sku": "A101",
+      "key": "af492ac9bda3217982a8d9c43510e80e02341e8da2500ec5a30200f8bb7ef30b",
+      "ok": true,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "sku": "A102",
+      "key": "67a0bff464ce16ca94762b0e97b512c5b60ef2ba78c74c27001f500c5e0794d7",
+      "ok": true,
+      "attempts": 1,
+      "error": null
+    }
+  ]
+}

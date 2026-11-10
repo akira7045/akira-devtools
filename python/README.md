@@ -36,7 +36,9 @@ akira-devtools --help           # list all tools
 ## Verify
 
 Each tool keeps its single-file test suite in its product directory
-(`../secretscan/test_secretscan.py`, etc.); all 135 tests pass.
+(`../secretscan/test_secretscan.py`, etc.); all 177 tool tests pass, plus 9
+tests for this package (`python3 test_devtools_package.py`). See
+`../compatibility.md` for the per-Python-version matrix.
 
 ## License
 
