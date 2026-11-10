@@ -23,6 +23,12 @@ test test-each:
 			fi; \
 		fi; \
 	done; \
+	out=$$($(PYTHON) python/test_devtools_package.py 2>&1); rc=$$?; \
+	if [ $$rc -eq 0 ] && echo "$$out" | grep -qE '^OK'; then \
+		echo "ok   python-package (unittest $$(echo "$$out" | grep -E '^Ran ' | tail -1))"; \
+	else \
+		echo "FAIL python-package (rc=$$rc)"; echo "$$out" | grep -E '^(FAIL|ERROR|Ran|OK|FAILED|Traceback)' | tail -5; fail=1; \
+	fi; \
 	exit $$fail
 
 build wheel:
