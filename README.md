@@ -21,7 +21,7 @@ Try everything in one command, zero setup: `bash demo.sh`
 ## Why these
 - **Single file** — copy one `.py` into your project, done.
 - **Stdlib only** — no pip, no virtualenv, no supply-chain risk.
-- **Tested** — 135 tests across the six tools, all passing.
+- **Tested** — 143 tests across the seven tools, all passing.
 - **Safe** — `dupfind` and `secretscan` never modify or delete your files.
 
 ## Honest positioning

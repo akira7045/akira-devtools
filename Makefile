@@ -1,11 +1,13 @@
 PYTHON ?= python3
-TOOLS := apidiff dupfind envcheck jsonl2csv logsum secretscan
+TOOLS := apidiff dupfind envcheck jsonl2csv logsum secretscan ga4-export-merge
 
 .PHONY: test test-each build wheel
 
 test test-each:
 	@fail=0; for t in $(TOOLS); do \
-		out=$$(cd $$t && $(PYTHON) test_$$t.py 2>&1); rc=$$?; \
+		testfile=test_$$t.py; \
+		[ "$$t" = "ga4-export-merge" ] && testfile=test_ga4merge.py; \
+		out=$$(cd $$t && $(PYTHON) $$testfile 2>&1); rc=$$?; \
 		if echo "$$out" | grep -qE '^Ran [0-9]+ tests?'; then \
 			if [ $$rc -eq 0 ] && echo "$$out" | grep -qE '^OK'; then \
 				echo "ok   $$t (unittest $$(echo "$$out" | grep -E '^Ran ' | tail -1))"; \
