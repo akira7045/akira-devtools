@@ -1,6 +1,6 @@
 # AKIRA Dev Tools Bundle
 
-Six single-file, dependency-free Python 3 CLI tools. Each ships with a test
+Seven single-file, dependency-free Python 3 CLI tools. Each ships with a test
 suite. No third-party packages required — just Python 3.8+.
 
 | Tool | Purpose | Tests |
@@ -11,6 +11,7 @@ suite. No third-party packages required — just Python 3.8+.
 | `dupfind`   | Find duplicate files by hash (read-only, never deletes)| 18/18 |
 | `envcheck`  | Lint a `.env` against a template/schema (never prints secrets) | 30/30 |
 | `logsum`    | Summarize access/syslog/JSONL logs into counts (read-only) | 13/13 |
+| `ga4merge`  | Merge multiple GA4 CSV exports (union columns, keep source) | 8/8 |
 
 Read the write-up: **[Catching API contract drift in CI](docs/catching-api-contract-drift-in-ci.md)** — a worked example using `apidiff`, with real command output.
 
@@ -82,6 +83,7 @@ python3 jsonl2csv/jsonl2csv.py --help
 python3 dupfind/dupfind.py --help
 python3 envcheck/envcheck.py --help
 python3 logsum/logsum.py --help
+python3 ga4-export-merge/ga4merge.py --help
 ```
 
 ### Install as commands (optional)
@@ -108,6 +110,7 @@ python3 jsonl2csv/test_jsonl2csv.py
 python3 dupfind/test_dupfind.py
 python3 envcheck/test_envcheck.py
 python3 logsum/test_logsum.py
+python3 ga4-export-merge/test_ga4merge.py
 ```
 
 ## Layout
@@ -122,6 +125,7 @@ products/
   dupfind/     dupfind.py, test_dupfind.py, README.md, LICENSE
   envcheck/    envcheck.py, test_envcheck.py, README.md, LICENSE
   logsum/      logsum.py, test_logsum.py, README.md, LICENSE
+  ga4-export-merge/  ga4merge.py, test_ga4merge.py, README.md, LICENSE
   python/      pip-installable packaging (pyproject.toml, console scripts)
 ```
 
