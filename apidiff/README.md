@@ -99,7 +99,7 @@ python3 apidiff.py check "$API_URL" contract.json --breaking-only || exit 1
 ## Run the tests
 
 ```bash
-python3 test_apidiff.py   # 40/40, uses a local HTTP server, no network needed
+python3 test_apidiff.py   # 48/48, uses a local HTTP server, no network needed
 ```
 
 ## License

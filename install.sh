@@ -15,6 +15,9 @@ for pair in apidiff:apidiff secretscan:secretscan jsonl2csv:jsonl2csv dupfind:du
   tool=${pair%%:*}
   dir=${pair#*:}
   target="$SRC_DIR/$dir/$tool.py"
+  # The delivered bundle uses short dir names (ga4merge/) while the source
+  # repo uses ga4-export-merge/; accept either so both layouts install fully.
+  [ -f "$target" ] || target="$SRC_DIR/$tool/$tool.py"
   if [ ! -f "$target" ]; then
     echo "missing: $target" >&2
     exit 1

@@ -124,6 +124,21 @@ def test_quotes_handled():
         check("quote_safe", r.stdout.count("rm -- ") == 1)
 
 
+import unittest
+
+
+class TestAllCases(unittest.TestCase):
+    """Runs the module-level test_* functions so pytest / unittest discover them."""
+
+    def test_all_cases(self):
+        before = failed
+        for name, fn in sorted(globals().items()):
+            if name.startswith("test_") and callable(fn):
+                with self.subTest(case=name):
+                    fn()
+        self.assertEqual(failed, before, f"{failed - before} check(s) failed")
+
+
 if __name__ == "__main__":
     for fn in [v for k, v in sorted(globals().items()) if k.startswith("test_")]:
         fn()

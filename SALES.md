@@ -50,10 +50,11 @@
 
 ## 納品物（バンドル購入時）
 
-- `akira-devtools-20261110-1406.tar.gz`
-  - SHA-256: `dd3cce78cfaee5252e274b9d5ebfa56a6961b9022a2ed27a760df195de466ee4`
-  - 7製品ソース + 各テスト + README + compatibility.md + MITライセンス + install.sh + demo.sh
+- `akira-devtools-bundle-commercial-20261110-rev1.tar.gz`
+  - SHA-256: `014bb2e1bcd95cfc133a185b7d5afcda87a300b331c8a102198b0c0e90b62b36`
+  - 7製品ソース + 各テスト + README + compatibility.md + MITライセンス + install.sh + demo.sh（READMEにga4mergeの購入リンクを含む7ツール全てを記載済み）
   - 同梱物は実機検証済み: `bash demo.sh` は7ツール全てを実行し exit 0、`install.sh` は7コマンドをsymlink、7スイート合計177テスト全パス（2026-11-10 UTC 実測）。
+  - **7ツールすべてが `pytest` と `python3 -m unittest` 両方でテスト収集可能**（rev1で apidiff/dupfind/jsonl2csv を unittest 対応化。CIに組み込んでも "NO TESTS RAN" にならない）。
   - **クロスバージョン実行検証済み**: Python 3.8.18 / 3.9.19 / 3.10.15 / 3.11.11 / 3.12.3 の5系すべてで `bash demo.sh` exit 0、177テスト全パス（885 test-executions, failure 0）。詳細は同梱 `compatibility.md`（2026-11-11 UTC 実測）。
 - 各製品のREADME（使い方・想定ユース）
 - ランディングページ `index.html`（任意ホスティング可）

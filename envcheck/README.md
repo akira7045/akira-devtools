@@ -134,7 +134,7 @@ No install needed. Copy `envcheck.py` anywhere and run it with Python 3.7+.
 ## Tests
 
 ```bash
-python3 test_envcheck.py    # 30/30 passed
+python3 test_envcheck.py    # 42/42 passed
 ```
 
 ## License

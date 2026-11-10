@@ -154,5 +154,18 @@ def main():
     return 0 if failed == 0 else 1
 
 
+import unittest
+
+
+class TestAllCases(unittest.TestCase):
+    """Wraps module-level test_* functions so pytest / unittest discover them."""
+
+    def test_all_cases(self):
+        for name, fn in sorted(globals().items()):
+            if name.startswith("test_") and callable(fn):
+                with self.subTest(case=name):
+                    fn()
+
+
 if __name__ == "__main__":
     sys.exit(main())

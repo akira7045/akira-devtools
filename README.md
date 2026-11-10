@@ -15,13 +15,15 @@ suite. No third-party packages required — just Python 3.8+.
 
 Read the write-up: **[Catching API contract drift in CI](docs/catching-api-contract-drift-in-ci.md)** — a worked example using `apidiff`, with real command output.
 
+Deciding whether to pay at all: **[Why pay when the free tool already works?](docs/why-pay-when-free-works.md)** — the honest case, including when you should just keep the free version.
+
 Try everything in one command, zero setup: `bash demo.sh`
 (creates a throwaway temp dir, feeds each tool sample input, cleans up after itself).
 
 ## Why these
 - **Single file** — copy one `.py` into your project, done.
 - **Stdlib only** — no pip, no virtualenv, no supply-chain risk.
-- **Tested** — all passing: 177 tests across the seven tools plus 9 for the installable package (186 total). Measured 2026-11-11 (run `make test`). Each tool ships its own self-contained runner: `python3 test_<tool>.py` reports the full count. Collection under a test framework varies by tool: `secretscan`, `envcheck`, `logsum`, `ga4merge` are `unittest.TestCase`-based and collect under both `pytest` and `python3 -m unittest`; `apidiff`, `jsonl2csv`, `dupfind` use bare `def test_*` functions that `pytest` collects in full but `unittest` does not — run those three via their own file or `pytest`.
+- **Tested** — all passing: 177 tests across the seven tools plus 9 for the installable package (186 total). Measured 2026-11-11 (run `make test`). Each tool ships its own self-contained runner: `python3 test_<tool>.py` reports the full count. **All seven tools now collect under both `pytest` and `python3 -m unittest`** — no "NO TESTS RAN" when you wire a tool into CI.
 - **Portable** — targets Python 3.8+ (stdlib only). Runtime-verified on **3.8.18, 3.9.19, 3.10.15, 3.11.11 and 3.12.3**: on every version `bash demo.sh` exits 0 (all seven tools run on sample input) and each tool's full test suite passes (177 tests total, 2026-11-11). See `compatibility.md` for the per-version matrix and reproduction steps.
 - **Safe** — `dupfind` and `secretscan` never modify or delete your files.
 
@@ -55,6 +57,12 @@ Pricing and scope are agreed per request. To start, **open a GitHub issue titled
 `inquiry: <tool or bundle>`** on this repository and describe your use case. I
 reply there; no email signup or external account needed.
 
+**Not sure it's worth paying for?** Read
+[Why pay when the free tool already works?](docs/why-pay-when-free-works.md) —
+a real, reproducible run where the free diff was silent and this gate was not.
+It shows the one situation that makes the paid line pay for itself, and it also
+tells you honestly when the MIT version is all you need.
+
 Fixed-price options for commercial license + 30-day support are also available
 to buy directly:
 
@@ -64,6 +72,7 @@ to buy directly:
 - [jsonl2csv — commercial license + support](https://15roh.gumroad.com/l/jsonl2csv-commercial)
 - [envcheck — commercial license + support](https://15roh.gumroad.com/l/envcheck-commercial)
 - [logsum — commercial license + support](https://15roh.gumroad.com/l/logsum-commercial)
+- [ga4merge — commercial license + support](https://15roh.gumroad.com/l/fmpbpl)
 - [Bundle — all tools + setup + 30-day support](https://15roh.gumroad.com/l/akira-devtools-bundle)
 
 See [SALES.md](SALES.md) for the current option list and indicative pricing.
