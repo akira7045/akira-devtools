@@ -3,6 +3,10 @@
 Seven single-file, dependency-free Python 3 CLI tools. Each ships with a test
 suite. No third-party packages required — just Python 3.8+.
 
+**Free under MIT** — use, modify and ship these however you like, no purchase
+needed. If your team needs a commercial license, a named support window, or
+setup help, there is an [optional paid bundle & support line](#commercial-use--support).
+
 | Tool | Purpose | Tests |
 |------|---------|-------|
 | `apidiff`   | Diff API responses vs a stored baseline (contract drift) | 48/48 |
