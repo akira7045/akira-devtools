@@ -19,7 +19,7 @@ sys.path.insert(0, SRC)
 import akira_devtools  # noqa: E402
 from akira_devtools import cli  # noqa: E402
 
-TOOLS = ("secretscan", "apidiff", "jsonl2csv", "dupfind", "envcheck", "logsum")
+TOOLS = ("secretscan", "apidiff", "jsonl2csv", "dupfind", "envcheck", "logsum", "ga4merge")
 
 
 class PackageShape(unittest.TestCase):
@@ -94,14 +94,29 @@ class Dispatcher(unittest.TestCase):
                 self._run(["logsum", "--help"])
         self.assertEqual(cm.exception.code, 0)
 
+    def test_dispatch_passes_clean_args(self):
+        # The dispatcher must strip both prog and tool name; otherwise the
+        # tool receives its own name as the first argument (e.g. ga4merge
+        # would treat "ga4merge" as an input file).
+        import io
+        from contextlib import redirect_stdout, redirect_stderr
+
+        with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as cm:
+                self._run(["ga4merge", "--help"])
+        self.assertEqual(cm.exception.code, 0)
+
 
 class ConsoleScriptEquivalence(unittest.TestCase):
     """The package must not regress the standalone scripts it wraps."""
 
+    DIRS = {"ga4merge": "ga4-export-merge"}
+
     def test_standalone_scripts_still_run(self):
         base = os.path.dirname(HERE)
         for name in TOOLS:
-            script = os.path.join(base, name, f"{name}.py")
+            d = self.DIRS.get(name, name)
+            script = os.path.join(base, d, f"{name}.py")
             self.assertTrue(os.path.isfile(script), script)
             proc = subprocess.run([sys.executable, script, "--help"],
                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE)

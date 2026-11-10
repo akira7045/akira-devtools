@@ -1,17 +1,18 @@
 """akira-devtools: zero-dependency developer tools.
 
-Bundles six single-file CLI tools: secretscan, apidiff, jsonl2csv,
-dupfind, envcheck, logsum.
+Bundles seven single-file CLI tools: secretscan, apidiff, jsonl2csv,
+dupfind, envcheck, logsum, ga4merge.
 """
 import sys
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
-_TOOLS = ("secretscan", "apidiff", "jsonl2csv", "dupfind", "envcheck", "logsum")
+_TOOLS = ("secretscan", "apidiff", "jsonl2csv", "dupfind", "envcheck",
+          "logsum", "ga4merge")
 
 
 def _run(name):
-    argv = sys.argv[1:]
+    argv = sys.argv[2:]
     if name == "secretscan":
         from . import secretscan
         sys.argv = ["secretscan"] + argv

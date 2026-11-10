@@ -31,3 +31,8 @@ def envcheck_main():
 def logsum_main():
     from akira_devtools.logsum import main
     return main(sys.argv[1:])
+
+
+def ga4merge_main():
+    from akira_devtools.ga4merge import main
+    return main(sys.argv[1:])
