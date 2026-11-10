@@ -23,10 +23,24 @@ python3 envcheck.py .env --example .env.example    # compare against a template
 python3 envcheck.py .env --schema schema.txt       # required + typed keys
 python3 envcheck.py .env --require API_KEY,DB_URL  # quick required-keys check
 python3 envcheck.py .env --example .env.example --strict
+python3 envcheck.py --predeploy .env --example .env.example --schema schema.txt --out ci-report.txt
 ```
 
 Exit code is `0` when clean, `1` when problems are found, `2` on usage error —
 ideal for CI gating. `--strict` turns warnings into errors.
+
+### Deploy gate mode
+
+`--predeploy` is the one-flag CI gate: it implies `--strict`, prints a final
+`RESULT: PASS` / `RESULT: FAIL` line, and exits **2** on any problem (errors
+*or* warnings) so a broken `.env` can never reach production. Add `--out PATH`
+to write the same plain-text (no-ANSI) report to a file for build artifacts or
+PR comments.
+
+```bash
+python3 envcheck.py --predeploy .env --example .env.example --schema schema.txt --out ci-report.txt
+# exit 0 -> deploy;  exit 2 -> block the deploy
+```
 
 ### Schema file
 
@@ -51,6 +65,8 @@ KEY?                # optional (type-checked if given)
 | `--strict` | Treat warnings as errors |
 | `--quiet` | Print only the summary |
 | `--no-color` | Disable ANSI colors |
+| `--predeploy` | CI/deploy gate: warnings are errors, exit `2` on failure, `RESULT: PASS/FAIL` line |
+| `--out PATH` | Write a plain-text report to `PATH` |
 
 ## Real output
 

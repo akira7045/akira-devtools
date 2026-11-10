@@ -175,6 +175,38 @@ def t_allow_empty():
     check("allow-empty suppress", code == 0)
 
 
+def t_predeploy_warn_fails():
+    d = make({".env": "A=1\nEXTRA=x\n", ".env.example": "A=1\n"})
+    code, out = run(d, ".env", "--example", os.path.join(d, ".env.example"), "--predeploy")
+    check("predeploy: warning -> exit 2", code == 2)
+    check("predeploy: RESULT FAIL", "RESULT: FAIL" in out)
+
+
+def t_predeploy_clean_passes():
+    d = make({".env": "A=1\n", ".env.example": "A=1\n"})
+    code, out = run(d, ".env", "--example", os.path.join(d, ".env.example"), "--predeploy")
+    check("predeploy: clean -> exit 0", code == 0)
+    check("predeploy: RESULT PASS", "RESULT: PASS" in out)
+
+
+def t_predeploy_error_fails():
+    d = make({".env": "A=1\n"})
+    code, out = run(d, ".env", "--require", "MISSING", "--predeploy")
+    check("predeploy: error -> exit 2", code == 2)
+
+
+def t_out_report_written():
+    d = make({".env": "A=1\n", ".env.example": "A=1\nB=2\n"})
+    rp = os.path.join(d, "report.txt")
+    code, out = run(d, ".env", "--example", os.path.join(d, ".env.example"),
+                    "--predeploy", "--out", rp)
+    body = open(rp, encoding="utf-8").read()
+    check("out: exit 2 on missing key", code == 2)
+    check("out: report has RESULT", "RESULT: FAIL" in body)
+    check("out: report has no ANSI", "\x1b[" not in body)
+    check("out: report mentions B", "'B'" in body)
+
+
 def main():
     for name, fn in sorted(globals().items()):
         if name.startswith("t_") and callable(fn):

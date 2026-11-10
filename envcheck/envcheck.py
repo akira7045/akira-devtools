@@ -12,6 +12,7 @@ Usage:
     python3 envcheck.py .env --schema schema.txt      # required + typed keys
     python3 envcheck.py .env --require API_KEY,DB_URL # quick required-keys check
     python3 envcheck.py .env --example .env.example --strict
+    python3 envcheck.py --predeploy .env --example .env.example --schema schema.txt --out report.txt
 
 Schema file format (one rule per line):
     KEY                 # required, any non-empty value
@@ -35,8 +36,11 @@ Options:
     --strict           treat warnings as errors
     --quiet            suppress per-key notes; print only the summary
     --no-color         disable ANSI colors
+    --predeploy        CI/deploy gate: treat warnings as errors, exit 2 on any
+                       problem, and write a plain-text report with --out
+    --out PATH         write a plain-text report (no ANSI colors) to PATH
 
-Exit code: 0 = ok, 1 = problems found, 2 = usage error.
+Exit code: 0 = ok, 1 = problems found, 2 = usage error or predeploy gate failed.
 
 License: MIT
 """
@@ -164,9 +168,45 @@ def main(argv=None):
     p.add_argument("--strict", action="store_true")
     p.add_argument("--quiet", action="store_true")
     p.add_argument("--no-color", action="store_true")
+    p.add_argument("--predeploy", action="store_true",
+                   help="CI/deploy gate: warnings are errors, exit 2 on failure")
+    p.add_argument("--out", help="write a plain-text report to this path")
     args = p.parse_args(argv)
 
+    if args.predeploy:
+        args.strict = True
+        args.no_color = True
+
     color = Colors(enabled=sys.stdout.isatty() and not args.no_color)
+
+    report_lines = []
+    _print = print
+
+    def emit(*a, **kw):
+        report_only = kw.pop("_report_only", False)
+        msg = " ".join(str(x) for x in a)
+        if report_only:
+            if args.out:
+                report_lines.append(msg)
+        else:
+            _print(*a, **kw)
+            if args.out:
+                report_lines.append(msg)
+
+    if args.out or args.predeploy:
+        color = Colors(enabled=False)
+
+    def out(*a, **kw):
+        emit(*a, **kw)
+
+    def flush_report():
+        if not args.out:
+            return
+        try:
+            with open(args.out, "w", encoding="utf-8") as f:
+                f.write("\n".join(report_lines) + "\n")
+        except OSError as e:
+            _print(f"envcheck: cannot write {args.out}: {e}", file=sys.stderr)
 
     try:
         pairs, duplicates = parse_env(args.file)
@@ -181,16 +221,16 @@ def main(argv=None):
     def err(msg):
         nonlocal errors
         errors += 1
-        print(f"{color.red('ERROR')}  {msg}")
+        out(f"{color.red('ERROR')}  {msg}")
 
     def warn(msg):
         nonlocal warnings
         warnings += 1
-        print(f"{color.yellow('WARN')}   {msg}")
+        out(f"{color.yellow('WARN')}   {msg}")
 
     def note(msg):
         if not args.quiet:
-            print(f"{color.dim('  ' + msg)}")
+            out(f"{color.dim('  ' + msg)}")
 
     for (key, val, lineno, problem) in pairs:
         if problem == "malformed":
@@ -248,13 +288,22 @@ def main(argv=None):
 
     total = len(values)
     if errors == 0 and warnings == 0:
-        print(color.green(f"OK: {total} keys validated, no problems"))
+        out(color.green(f"OK: {total} keys validated, no problems"))
+        if args.predeploy:
+            out("RESULT: PASS")
+        flush_report()
         return 0
 
     if not args.quiet:
-        print()
+        out()
     summary = f"{total} keys, {errors} error(s), {warnings} warning(s)"
-    print(color.red(summary) if errors else color.yellow(summary))
+    out(color.red(summary) if errors else color.yellow(summary))
+    failed = bool(errors) or (args.predeploy and bool(warnings))
+    if args.predeploy:
+        out("RESULT: " + ("FAIL" if failed else "PASS"))
+    flush_report()
+    if args.predeploy and failed:
+        return 2
     return 1 if errors else 0
 
 
